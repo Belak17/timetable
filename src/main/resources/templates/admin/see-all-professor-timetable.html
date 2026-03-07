@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Professor Timetable</title>
+    <link rel="stylesheet" th:href="@{/css/style-admin/style-see-all-professor-timetable.css}">
+</head>
+<body>
+<input type="checkbox" id="toggle-sidebar" />
+<header>
+    <div class="head-box">
+        <!-- Checkbox caché -->
+
+        <label for="toggle-sidebar">
+            <div  id="menu">
+
+                <img th:src="@{/images/menu-burger.png}">
+
+
+            </div>
+        </label>
+        <h2 class="text-title">Emploi Du Temps Des Professeurs  </h2>
+    </div>
+</header>
+<main class="center-wrapper">
+
+    <table Bgcolor="lightgray" Border="1" rules="all">
+        <thead>
+        <tr>
+            <th>Identifiant</th>
+            <th>Spécialité</th>
+            <th>Grade</th>
+            <th>Statut</th>
+            <th>Nom</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="professortimetable : ${ProfessorTimetableList.content}"
+            class="clickable-row"
+            th:data-image="@{/admin/preview/{id}(id=${professortimetable.id})}">
+            <td th:text="${professortimetable.id}"></td>
+            <td th:text="${professortimetable.speciality}"></td>
+            <td th:text="${professortimetable.grade}"></td>
+            <td th:text="${professortimetable.statut}"></td>
+            <td th:text="${professortimetable.professor != null
+        ? professortimetable.professor.firstname + ' ' + professortimetable.professor.lastname
+        : 'Non assigné'}">
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div style="margin-top:20px">
+
+        <!-- Previous -->
+        <a th:if="${ProfessorTimetableList.hasPrevious()}"
+           th:href="@{/admin/professor/timetables(page=${ProfessorTimetableList.number - 1}, size=${ProfessorTimetableList.size})}">
+            ⬅ Previous
+        </a>
+
+        <!-- Numéro de page -->
+        <span  th:if="${ProfessorTimetableList.totalPages > 0}">
+        Page
+        <span th:text="${ProfessorTimetableList.number + 1}"></span>
+        /
+        <span th:text="${ProfessorTimetableList.totalPages}"></span>
+    </span>
+
+        <!-- Next -->
+        <a th:if="${ProfessorTimetableList.hasNext()}"
+           th:href="@{/admin/professor/timetables(page=${ProfessorTimetableList.number + 1}, size=${ProfessorTimetableList.size})}">
+            Next ➡
+        </a>
+
+    </div>
+</main>
+<section class="icons">
+    <div class="text-menu">
+        <h2>
+            Menu
+        </h2>
+    </div>
+    <div class="icons-option">
+        <div class="icon-container">
+            <a th:href="@{/admin/dashboard}">
+                <img th:src="@{/images/home.png}" width="20">
+
+                <span class="tooltip">Dashboard</span>
+            </a>
+        </div>
+        <div class="icon-container">
+            <a th:href="@{/admin/profile}">
+                <img th:src="@{/images/user (1).png}" width="20">
+
+                <span class="tooltip">Profil</span>
+            </a>
+        </div>
+        <div class="icon-container">
+            <a th:href="@{/admin/timetable}">
+                <img th:src="@{/images/folder-upload.png}" width="20">
+
+
+                <span class="tooltip">Emploi du temps </span>
+            </a>
+        </div>
+        <div class="icon-container">
+            <a th:href="@{/admin/group/timetables}">
+                <img th:src="@{/images/users-class.png}" width="20">
+
+
+                <span class="tooltip">Emploi du temps des Etudiant </span>
+            </a>
+        </div>
+        <div class="icon-container">
+            <a th:href="@{/admin/professor/timetables}">
+                <img th:src="@{/images/workshop.png}" width="20">
+
+
+                <span class="tooltip">Emploi du temps des Professeurs </span>
+            </a>
+        </div>
+        <div class="icon-container">
+
+            <label for="toggle-sidebar" class="close-btn">
+                <img th:src="@{/images/grid.png}" width="20">
+
+                <span class="tooltip">Espace </span>
+            </label>
+        </div>
+        <div class="icon-container">
+
+            <label for="toggle-sidebar" class="close-btn">
+                <img th:src="@{/images/cross-small.png}" width="20">
+
+                <span class="tooltip">Fermer </span>
+            </label>
+        </div>
+    </div>
+</section>
+<div id="timetableModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+    background:rgba(0,0,0,0.7); justify-content:center; align-items:center;">
+    <span id="closeModal" style="position:absolute; top:20px; right:30px; color:white; cursor:pointer; font-size:30px;">&times;</span>
+    <img id="modalImage" src="" style="max-width:80%; max-height:80%; border:2px solid white;">
+</div>
+<script>
+    document.querySelectorAll('.clickable-row').forEach(row => {
+        row.addEventListener('click', () => {
+            const imageUrl = row.dataset.image; // ex: /preview/123
+            const modal = document.getElementById('timetableModal');
+            const modalImg = document.getElementById('modalImage');
+
+            modalImg.src = imageUrl; // Spring renverra le byte[] comme image
+            modal.style.display = 'flex';
+        });
+    });
+
+    // Fermer le modal
+    document.getElementById('closeModal').addEventListener('click', () => {
+        document.getElementById('timetableModal').style.display = 'none';
+    });
+
+    // Fermer en cliquant en dehors de l'image
+    document.getElementById('timetableModal').addEventListener('click', (e) => {
+        if (e.target.id === 'timetableModal') {
+            document.getElementById('timetableModal').style.display = 'none';
+        }
+    });
+</script>
+
+</body>
+</html>

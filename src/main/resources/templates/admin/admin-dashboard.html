@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/style-admin/style-admin-dashboard.css}">
+    <link rel="stylesheet"
+          href="https://cdn-uicons.flaticon.com/uicons-solid-straight/css/uicons-solid-straight.css">
+</head>
+<body>
+<input type="checkbox" id="toggle-sidebar" />
+<header>
+    <div class="head-box">
+        <!-- Checkbox caché -->
+
+        <label for="toggle-sidebar">
+            <div  id="menu">
+
+                <img th:src="@{/images/menu-burger.png}">
+
+
+            </div>
+        </label>
+        <h2 th:text="'Bienvenue cher Admin ' + ${fullname}"></h2>
+    </div>
+</header>
+
+<section class="icons">
+    <div class="text-menu">
+        <h2>
+            Menu
+        </h2>
+    </div>
+    <div class="icons-option">
+        <div class="icon-container">
+            <a th:href="@{/admin/dashboard}">
+                <img th:src="@{/images/home.png}" width="20">
+
+                <span class="tooltip">Dashboard</span>
+            </a>
+        </div>
+        <div class="icon-container">
+            <a th:href="@{/admin/profile}">
+                <img th:src="@{/images/user (1).png}" width="20">
+
+                <span class="tooltip">Profil</span>
+            </a>
+        </div>
+        <div class="icon-container">
+            <a th:href="@{/admin/timetable}">
+                <img th:src="@{/images/folder-upload.png}" width="20">
+
+
+                <span class="tooltip">Emploi du temps </span>
+            </a>
+        </div>
+        <div class="icon-container">
+            <a th:href="@{/admin/group/timetables}">
+                <img th:src="@{/images/users-class.png}" width="20">
+
+
+                <span class="tooltip">Emploi du temps des Etudiant </span>
+            </a>
+        </div>
+        <div class="icon-container">
+            <a th:href="@{/admin/professor/timetables}">
+                <img th:src="@{/images/workshop.png}" width="20">
+
+
+                <span class="tooltip">Emploi du temps des Professeurs </span>
+            </a>
+        </div>
+        <div class="icon-container">
+
+            <label for="toggle-sidebar" class="close-btn">
+                <img th:src="@{/images/grid.png}" width="20">
+
+                <span class="tooltip">Espace </span>
+            </label>
+        </div>
+        <div class="icon-container">
+
+            <label for="toggle-sidebar" class="close-btn">
+                <img th:src="@{/images/cross-small.png}" width="20">
+
+                <span class="tooltip">Fermer </span>
+            </label>
+        </div>
+    </div>
+</section>
+<script>
+
+</script>
+
+</body>
+</html>

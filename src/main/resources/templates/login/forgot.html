@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Forgot form</title>
+    <link rel="stylesheet"
+          href="https://cdn-uicons.flaticon.com/uicons-solid-straight/css/uicons-solid-straight.css">
+    <link rel="stylesheet" th:href="@{css/style-login/style-forgot.css}">
+    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-brands/css/uicons-brands.css">
+
+</head>
+<body>
+<main class="forgot-box">
+    <section class="left-block">
+        <div class="presentation">
+            <h2>Se connecter</h2>
+            <h3> Étudiant/Ancien Étudiant/Enseignant/Administration/<br>
+                Entreprise</h3>
+
+        </div>
+        <div class="message">
+            Aucun problème. Entrez votre adresse e-mail
+            et nous vous enverrons par e-mail
+            un lien de réinitialisation de mot de
+            passe qui vous permettra de choisir un nouveau.
+        </div>
+        <div class="input-email">
+            <img th:src="@{/images/user.png}">
+            <input type="email" autocomplete="off"
+                   placeholder="Adresse email" required name="email">
+
+        </div>
+        <div class="others">
+            <button class="send">Envoyer</button>
+        </div>
+    </section>
+
+    <section class="right-block">
+
+    </section>
+</main>
+<style>
+    .right-block
+{
+    background: url("/images/login_box_bg.png");
+    position: absolute;
+
+    right: 0;
+    height: 520px;
+    width: 451px;
+}
+</style>
+</body>
+
+</html>

@@ -1,0 +1,265 @@
+/* ===== Reset & Base ===== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f4f6f8;
+    color: #333;
+}
+
+/* ===== Header ===== */
+.head-box {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 10px 20px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e0e0e0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+}
+
+.head-box #menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.head-box #menu:hover {
+    background-color: #e0f2ff;
+}
+
+#toggle-sidebar {
+    display: none;
+}
+
+#toggle-sidebar:checked ~ header #menu img {
+    transform: rotate(90deg);
+}
+
+.text-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #007BFF;
+}
+
+/* ===== Sidebar ===== */
+.icons {
+    position: fixed;
+    top: 10px;
+    left: -260px;
+    width: 260px;
+    height: 100vh;
+    background-color: #ffffff;
+    box-shadow: 2px 0 14px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: left 0.3s ease;
+    z-index: 90;
+}
+
+#toggle-sidebar:checked ~ .icons {
+    left: 0;
+}
+
+.icons .text-menu {
+    width: 100%;
+    padding: 20px;
+    border-bottom: 1px solid #e0e0e0;
+    text-align: center;
+    background-color: #f8f9fa;
+}
+
+.icons .text-menu h2 {
+    font-size: 20px;
+    color: #333;
+}
+
+.icons-option {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.icon-container {
+    width: 100%;
+}
+
+.icon-container a,
+.icon-container label {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    padding: 12px 20px;
+    color: #333;
+    text-decoration: none;
+    transition: background-color 0.3s ease, border-radius 0.3s ease;
+}
+
+.icon-container a:hover,
+.icon-container label:hover {
+    background-color: #e6f0ff;
+    border-radius: 8px;
+}
+
+.tooltip {
+    font-size: 14px;
+    margin-left: 5px;
+}
+
+/* ===== Main Content ===== */
+.center-wrapper {
+    margin: 90px auto 20px auto; /* sous le header */
+    padding: 20px;
+    max-width: 1200px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* ===== Main Content ===== */
+.center-wrapper {
+    margin: 100px auto 40px auto;
+    padding: 20px;
+    max-width: 1100px;
+}
+
+/* ===== Upload Container ===== */
+.upload {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* ===== Upload Card ===== */
+.form-upload {
+    background-color: #ffffff;
+    padding: 30px;
+    width: 450px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition: transform 0.2s ease;
+}
+
+.form-upload:hover {
+    transform: translateY(-5px);
+}
+
+.form-upload h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #007BFF;
+}
+
+/* ===== Custom File Input ===== */
+.custom-file {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #f8f9fa;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+.custom-file input[type="file"] {
+    display: none;
+}
+
+.file-btn {
+    background-color: #007BFF;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.file-btn:hover {
+    background-color: #0056b3;
+}
+
+.file-name {
+    font-size: 14px;
+    color: #555;
+}
+
+.clearFileBtn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.clearFileBtn:hover {
+    background-color: #b02a37;
+}
+
+/* ===== Upload Button ===== */
+.button-upload {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.button-upload:hover {
+    background-color: #0056b3;
+}
+
+/* ===== Alerts ===== */
+.alert {
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.alert-danger {
+    background-color: #ffe5e5;
+    color: #b02a37;
+}
+
+.alert-success {
+    background-color: #e6ffed;
+    color: #198754;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+    .upload {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .form-upload {
+        width: 90%;
+    }
+}
+
+
+

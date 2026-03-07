@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Login form</title>
+    <link rel="stylesheet"
+          href="https://cdn-uicons.flaticon.com/uicons-solid-straight/css/uicons-solid-straight.css">
+    <link rel="stylesheet" th:href="@{/css/style-login/style-login.css}">
+    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-brands/css/uicons-brands.css">
+
+</head>
+<body>
+<form class="login-box" method="post" th:action="@{/login}">
+
+    <section class="left-block">
+        <div class="presentation">
+            <h2>Se connecter</h2>
+            <h3> Étudiant/Ancien Étudiant/Enseignant/Administration/<br>
+                Entreprise</h3>
+
+        </div>
+        <div class="inputs">
+            <div class="input">
+                <img th:src="@{/images/user.png}">
+                <input type="text" autocomplete="off" name="userId"
+                       placeholder="Nom d'utilisateur" required/>
+            </div>
+            <div class="input">
+                <img th:src="@{/images/lock.png}">
+                <input type="password" autocomplete="off" name="password"
+                       placeholder="Mot de passe" required />
+
+            </div>
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
+        </div>
+        <div th:if="${failure}" class="alert">
+            <span th:text="${failure}"></span>
+        </div>
+        <div class="others">
+            <div class="forgot-link"><a th:href="@{/forgot}">Mot de passe oublié ? </a></div>
+            <button  type="submit" class="connect">Se connecter</button>
+        </div>
+    </section>
+
+    <section class="right-block">
+
+    </section>
+
+</form>
+<style>
+    .right-block
+{
+    background: url("/images/login_box_bg.png");
+    position: absolute;
+
+    right: 0;
+    height: 520px;
+    width: 451px;
+}
+</style>
+</body>
+</html>

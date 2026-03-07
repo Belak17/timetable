@@ -1,0 +1,134 @@
+.login-box
+{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    box-shadow: 0 0 14px 5px #0003;
+    width: 900px;
+    height: 520px;
+    margin-top: 30px;
+    margin-bottom: 29px;
+    position: relative;
+
+
+
+}
+
+body
+{
+    background-color: ghostwhite;
+    display: flex;
+    flex-direction: column;
+    justify-content:center ;
+    align-items: center;
+    height: 100vh;            /* prend toute la hauteur écran */
+    margin: 0;
+    font-family: Cairo;
+}
+
+
+
+.left-block
+{
+    margin-top: 70px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-left: 20px;
+
+
+}
+
+input
+{
+    border: none;
+
+}
+
+input:focus
+{
+    outline:none;
+}
+
+.input
+{
+    display: flex;
+    flex-direction: row;
+    border: 1px solid lightblue;
+    padding: 10px;
+    gap: 6px;
+    position: relative;
+    width:43%;
+    bottom:20px;
+}
+
+.inputs
+{
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+}
+
+.input img
+{
+     color: #999;
+     width: 15px;
+     height: 15px;
+}
+
+
+.others
+{
+    display: flex;
+    flex-direction: row;
+}
+
+.connect
+{
+    display: flex;           /* aligne icône + texte horizontalement */
+    align-items: center;     /* centre verticalement icône et texte */
+    justify-content: flex-start;
+    gap: 10px;               /* petit espace horizontal entre icône et texte */
+    padding: 10px 15px;
+    font-size: 1rem;
+    background-color: #21ba45;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    left:200px;
+    top: 30px;
+
+}
+
+h3
+{
+    font-family: Cairo, system-ui,
+    -apple-system, Segoe UI, Roboto
+    , Oxygen, Ubuntu, Cantarell, Helvetica Neue,
+     Arial, Noto Sans, Liberation Sans,
+      sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    Segoe UI Symbol, "Noto Color Emoji";
+    color: #073772;
+    margin: 0;
+    font-weight: 400;
+    font-size: 1rem;
+}
+
+.alert {
+
+    padding: 12px 15px;
+    border-radius: 6px;
+    font-size: 14px;
+    border: 2px solid red;
+    background-color: lightcoral;
+    width:50%;
+}
+.alert span
+{
+   margin-left:40px;
+   font-weight: bold;
+   font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}

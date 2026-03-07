@@ -1,0 +1,182 @@
+/* ===== Reset & Base ===== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f4f6f8;
+    color: #333;
+}
+
+/* ===== Header ===== */
+.head-box {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 10px 20px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e0e0e0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+}
+
+.head-box #menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.head-box #menu:hover {
+    background-color: #e0f2ff;
+}
+
+#toggle-sidebar {
+    display: none;
+}
+
+#toggle-sidebar:checked ~ header #menu img {
+    transform: rotate(90deg);
+}
+
+.text-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #007BFF;
+}
+
+/* ===== Sidebar ===== */
+.icons {
+    position: fixed;
+    top: 50px;
+    left: -260px;
+    width: 260px;
+    height: 100vh;
+    background-color: #ffffff;
+    box-shadow: 2px 0 14px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: left 0.3s ease;
+    z-index: 90;
+}
+
+#toggle-sidebar:checked ~ .icons {
+    left: 0;
+}
+
+.icons .text-menu {
+    width: 100%;
+    padding: 20px;
+    border-bottom: 1px solid #e0e0e0;
+    text-align: center;
+    background-color: #f8f9fa;
+}
+
+.icons .text-menu h2 {
+    font-size: 20px;
+    color: #333;
+}
+
+.icons-option {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.icon-container {
+    width: 100%;
+}
+
+.icon-container a,
+.icon-container label {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    padding: 12px 20px;
+    color: #333;
+    text-decoration: none;
+    transition: background-color 0.3s ease, border-radius 0.3s ease;
+}
+
+.icon-container a:hover,
+.icon-container label:hover {
+    background-color: #e6f0ff;
+    border-radius: 8px;
+}
+
+.tooltip {
+    font-size: 14px;
+    margin-left: 5px;
+}
+
+/* ===== Main Content ===== */
+.center-wrapper {
+    margin: 90px auto 20px auto; /* sous le header */
+    padding: 20px;
+    max-width: 1200px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* ===== Table ===== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+th {
+    background-color: #007BFF;
+    color: white;
+    font-weight: 600;
+    padding: 14px 12px;
+    text-align: left;
+}
+
+td {
+    padding: 12px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f5f9;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+    .head-box {
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .text-title {
+        font-size: 20px;
+    }
+
+    .center-wrapper {
+        margin: 80px 10px 20px 10px;
+        padding: 15px;
+    }
+
+    .icons {
+        width: 220px;
+    }
+}

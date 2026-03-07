@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fr"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Upload Timetable</title>
+    <link rel="stylesheet" th:href="@{/css/style-admin/style-admin-upload-timetable.css}">
+    <link rel="stylesheet"
+          href="https://cdn-uicons.flaticon.com/uicons-solid-straight/css/uicons-solid-straight.css">
+</head>
+<body>
+<input type="checkbox" id="toggle-sidebar" />
+<header>
+    <div class="head-box">
+        <!-- Checkbox caché -->
+
+        <label for="toggle-sidebar">
+            <div  id="menu">
+
+                <img th:src="@{/images/menu-burger.png}">
+
+
+            </div>
+        </label>
+        <h2>Envoi des emploi du temps </h2>
+    </div>
+</header>
+
+<section class="icons">
+    <div class="text-menu">
+        <h2>
+            Menu
+        </h2>
+    </div>
+    <div class="icons-option">
+        <div class="icon-container">
+            <a th:href="@{/admin/dashboard}">
+                <img th:src="@{/images/home.png}" width="20">
+
+                <span class="tooltip">Dashboard</span>
+            </a>
+        </div>
+        <div class="icon-container">
+            <a th:href="@{/admin/profile}">
+                <img th:src="@{/images/user (1).png}" width="20">
+
+                <span class="tooltip">Profil</span>
+            </a>
+        </div>
+        <div class="icon-container">
+            <a th:href="@{/admin/timetable}">
+                <img th:src="@{/images/folder-upload.png}" width="20">
+
+
+                <span class="tooltip">Emploi du temps </span>
+            </a>
+        </div>
+        <div class="icon-container">
+            <a th:href="@{/admin/group/timetables}">
+                <img th:src="@{/images/users-class.png}" width="20">
+
+
+                <span class="tooltip">Emploi du temps des Etudiant </span>
+            </a>
+        </div>
+        <div class="icon-container">
+            <a th:href="@{/admin/professor/timetables}">
+                <img th:src="@{/images/workshop.png}" width="20">
+
+
+                <span class="tooltip">Emploi du temps des Professeurs </span>
+            </a>
+        </div>
+        <div class="icon-container">
+
+            <label for="toggle-sidebar" class="close-btn">
+                <img th:src="@{/images/grid.png}" width="20">
+
+                <span class="tooltip">Espace </span>
+            </label>
+        </div>
+        <div class="icon-container">
+
+            <label for="toggle-sidebar" class="close-btn">
+                <img th:src="@{/images/cross-small.png}" width="20">
+
+                <span class="tooltip">Fermer </span>
+            </label>
+        </div>
+    </div>
+</section>
+<main class="center-wrapper">
+
+
+    <div class="upload">
+
+        <form method="post" th:action="@{/admin/upload/professortimetable}" enctype="multipart/form-data" class="form-upload">
+            <h3>Emploi du Temps des Professeurs</h3>
+            <label class="custom-file">
+                <input type="file" name="excelFile" accept=".xls,.xlsx" class="excelFileInput">
+                <span class="file-btn">Choisir un fichier</span>
+                <span class="file-name">Aucun fichier</span>
+                <button type="button" class="clearFileBtn" style="margin-left: 10px;">Supprimer</button>
+            </label>
+            <button type="submit" class="button-upload">Uploader</button>
+            <span class="upload-message">Fichier chargé avec succès !</span>
+            <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+            <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+        </form>
+
+        <form method="post" th:action="@{/admin/upload/grouptimetable}" enctype="multipart/form-data" class="form-upload" id="group-upload">
+            <h3>Emploi du Temps des Etudiants</h3>
+            <label class="custom-file">
+                <input type="file" name="excelFile" accept=".xls,.xlsx" class="excelFileInput">
+                <span class="file-btn">Choisir un fichier</span>
+                <span class="file-name">Aucun fichier</span>
+                <button type="button" class="clearFileBtn" style="margin-left: 10px;">Supprimer</button>
+            </label>
+            <button type="submit" class="button-upload">Uploader</button>
+            <span class="upload-message">Fichier chargé avec succès !</span>
+
+        </form>
+    </div>
+
+</main>
+<style>
+    .upload-message {
+        display: none; /* caché par défaut */
+        position: absolute;
+        left: 60%;  /* à côté du formulaire */
+        top: 60%;
+        transform: translateY(-50%);
+        background-color: #4CAF50;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 0.9rem;
+        box-shadow: 0 0 5px #0003;
+    }
+</style>
+
+<script>
+    document.querySelectorAll('.form-upload').forEach(form => {
+
+        const input = form.querySelector('.excelFileInput');
+        const display = form.querySelector('.file-name');
+        const clearBtn = form.querySelector('.clearFileBtn');
+        const message = form.querySelector('.upload-message');
+
+        input.addEventListener('change', function() {
+            if(this.files.length > 0){
+                display.textContent = this.files[0].name;
+
+                message.style.display = 'inline';
+                setTimeout(() => {
+                    message.style.display = 'none';
+                }, 3000);
+            } else {
+                display.textContent = "Aucun fichier";
+            }
+        });
+
+        clearBtn.addEventListener('click', function() {
+            input.value = "";
+            display.textContent = "Aucun fichier";
+            message.style.display = 'none';
+        });
+
+    });
+</script>
+
+
+</body>
+</html>
