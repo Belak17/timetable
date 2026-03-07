@@ -10,6 +10,9 @@ import com.belak.timetable.student.entity.StudentEntity;
 import com.belak.timetable.student.repository.StudentRepository;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -54,6 +57,11 @@ public class StudentService {
         }
 
         return student.getGroupTimetable().getFileData();
+    }
+    public Page<StudentEntity> getStudentByFieldAndYearAndGroup(String field,int year,String group,int page,int size)
+    {
+        Pageable pageable = PageRequest.of(page, size);
+        return studentRepository.findByFieldAndYearAndGroup(field,year,group,pageable);
     }
 
 }

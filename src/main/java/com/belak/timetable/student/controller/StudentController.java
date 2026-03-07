@@ -1,22 +1,21 @@
 package com.belak.timetable.student.controller;
 
 import com.belak.timetable.admin.dto.AdminDto;
+import com.belak.timetable.grouptimetable.entity.GroupTimetableEntity;
 import com.belak.timetable.grouptimetable.service.GroupTimetableService;
 import com.belak.timetable.student.dto.StudentDto;
 import com.belak.timetable.student.entity.StudentEntity;
 import com.belak.timetable.student.service.StudentService;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 

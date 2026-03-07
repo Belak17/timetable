@@ -1,6 +1,8 @@
 package com.belak.timetable.student.repository;
 
 import com.belak.timetable.student.entity.StudentEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
@@ -14,4 +16,5 @@ public interface StudentRepository extends JpaRepository<StudentEntity,Long> {
 
     Optional<StudentEntity> findByUserId(String userId);
 
+    Page<StudentEntity> findByFieldAndYearAndGroup(String field, int year, String group, Pageable pageable);
 }

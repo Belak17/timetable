@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Group Timetable </title>
+    <link rel="stylesheet" th:href="@{/css/style-admin/style-see-all-professor-timetable.css}">
+</head>
+<body>
+<input type="checkbox" id="toggle-sidebar" />
+<header>
+    <div class="head-box">
+        <!-- Checkbox caché -->
+
+        <label for="toggle-sidebar">
+            <div  id="menu">
+
+                <img th:src="@{/images/menu-burger.png}">
+
+
+            </div>
+        </label>
+        <h2 class="text-title">Details Etudiants  </h2>
+    </div>
+</header>
+<main class="center-wrapper">
+    <table Bgcolor="lightgray" Border="1" rules="all">
+
+        <tr>
+            <th>Departement</th>
+            <th>Filiere</th>
+            <th>Groupe</th>
+            <th>Annee</th>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Email</th>
+            <th>Identfiant</th>
+        </tr>
+
+        <tr th:each="student : ${students.content}">
+            <td th:text="${student.department}"></td>
+            <td th:text="${student.field}"></td>
+            <td th:text="${student.group}"></td>
+            <td th:text="${student.year}"></td>
+            <td th:text="${student.lastname}"></td>
+            <td th:text="${student.firstname}"></td>
+            <td th:text="${student.email}"></td>
+            <td th:text="${student.userId}"></td>
+        </tr>
+
+    </table>
+    <div style="margin-top:20px">
+
+        <a th:if="${students.hasPrevious()}"
+           th:href="@{/admin/student/{field}/{year}/{group}/details(field=${field}, year=${year}, group=${group}, page=${GroupStudentList.number - 1}, size=${GroupStudentList.size})}">
+            ⬅ Previous
+        </a>
+
+        <!-- Page -->
+        <span th:if="${students.totalPages > 0}">
+        Page
+        <span th:text="${students.number + 1}"></span>
+        /
+        <span th:text="${students.totalPages}"></span>
+    </span>
+
+        <a th:if="${students.hasNext()}"
+           th:href="@{/admin/student/{field}/{year}/{group}/details(field=${field}, year=${year}, group=${group}, page=${GroupStudentList.number + 1}, size=${GroupStudentList.size})}">
+            Next ➡
+        </a>
+
+    </div>
+</main>
+<style>
+</style>
+</body>
+</html>

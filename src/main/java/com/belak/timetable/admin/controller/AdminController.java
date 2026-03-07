@@ -4,6 +4,8 @@ import com.belak.timetable.admin.dto.AdminDto;
 import com.belak.timetable.admin.service.AdminService;
 import com.belak.timetable.grouptimetable.entity.GroupTimetableEntity;
 import com.belak.timetable.professortimetable.entity.ProfessorTimetableEntity;
+import com.belak.timetable.student.entity.StudentEntity;
+import com.belak.timetable.student.service.StudentService;
 import com.belak.timetable.user.dto.UserDto;
 import com.belak.timetable.user.service.UserDetailsServiceImpl;
 import org.springframework.data.domain.Page;
@@ -22,9 +24,12 @@ import java.io.IOException;
 public class AdminController {
     private final AdminService adminService;
     private final UserDetailsServiceImpl userDetailsService ;
-    AdminController(AdminService adminService , UserDetailsServiceImpl userDetailsService) {
+    private final StudentService studentService ;
+    AdminController(AdminService adminService , UserDetailsServiceImpl userDetailsService ,
+                    StudentService studentService) {
         this.adminService = adminService;
         this.userDetailsService=userDetailsService ;
+        this.studentService=studentService ;
     }
 
     @GetMapping("/dashboard")
@@ -51,6 +56,21 @@ public class AdminController {
     public String showAdminUploadTimetable(Authentication authentication , Model model) {
         return "admin/admin-upload-timetable.html";
     }
-
+    @GetMapping("/student/{field}/{year}/{group}/details")
+    public String showGroupStudents(Authentication authentication, Model model,
+                                    @RequestParam(defaultValue = "0") int page,
+                                    @RequestParam(defaultValue = "10") int size,
+                                    @PathVariable String field,
+                                    @PathVariable String group,
+                                    @PathVariable int year
+    )
+    {
+        Page<StudentEntity> students = studentService.getStudentByFieldAndYearAndGroup(field,year,group,page,size);
+        model.addAttribute("students", students);
+        model.addAttribute("field", field);
+        model.addAttribute("group", group);
+        model.addAttribute("year", year);
+        return "/admin/see-group-student.html";
+    }
 
 }
