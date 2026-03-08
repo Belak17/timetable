@@ -135,7 +135,7 @@ public class GroupTimetableService {
                     // Ajustement mise en page
                     // =========================
 
-                    for (int i = 14; i <= 21; i++) {
+                    for (int i = 8; i <= 16; i++) {
                         dataSheet.setRowHeight(i, 40);
                     }
 
