@@ -1,5 +1,7 @@
 package com.belak.timetable.user.entity;
 
+import com.belak.timetable.enumeration.Departement;
+import com.belak.timetable.enumeration.Nationalite;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,6 +11,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 
@@ -26,15 +29,41 @@ public class UserEntity implements UserDetails {
     private Long id;
 
     @Column(unique = true, nullable = false)
-    private String userId;
+    private String username;
+
+    @Column(unique = true,nullable = false)
+    private String cin ;
+    @Column(unique = true, nullable = false)
+    private String userId ;
 
     @Column(nullable = false)
     private String password;
-    private String lastname ;
-    private String firstname ;
+    private String nom; //nom
+    private String prenom;//prenom
+    private String prenomArabe;
+    private String nomArabe;
 
     @Column(unique = true , nullable = false)
     private String email ;
+    private String telephone;
+    private String sexe;
+    private LocalDate dateNaissance;
+
+    private String villeNaissance;
+    private String villeNaissanceArabe;
+
+    private String adresse;
+    private String codePostal;
+    private String ville;
+
+    @Enumerated(EnumType.STRING)
+    private Nationalite nationalite;
+
+    @Enumerated(EnumType.STRING)
+    private Departement department ;
+
+    private String codeDepartement;
+
     @Enumerated(EnumType.STRING)
     private Role role = Role.USER;
     public enum Role {
@@ -50,7 +79,7 @@ public class UserEntity implements UserDetails {
 
     @Override
     public String getUsername() {
-        return userId;
+        return username;
     }
 
     @Override

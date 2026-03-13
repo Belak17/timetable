@@ -1,12 +1,9 @@
 package com.belak.timetable.user.service;
 
 
-import com.belak.timetable.admin.dto.AdminDto;
-import com.belak.timetable.admin.entity.AdminEntity;
 import com.belak.timetable.user.dto.UserDto;
 import com.belak.timetable.user.entity.UserEntity;
 import com.belak.timetable.user.repository.UserRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -34,7 +31,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         );
 
         return new org.springframework.security.core.userdetails.User(
-                user.getUserId(),
+                user.getUsername(),
                 user.getPassword(),
                 authorities
         );
@@ -45,9 +42,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 .orElseThrow(() -> new RuntimeException("Admin non trouvé pour userId : " + userId));
 
         return UserDto.builder()
-                .userId(userEntity.getUserId())
-                .firstName(userEntity.getFirstname())
-                .lastName(userEntity.getLastname())
+                .userId(userEntity.getUsername())
+                .firstName(userEntity.getPrenom())
+                .lastName(userEntity.getNom())
                 .email(userEntity.getEmail())
                 .build();
     }

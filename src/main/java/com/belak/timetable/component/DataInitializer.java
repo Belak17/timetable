@@ -36,12 +36,12 @@ public class DataInitializer implements CommandLineRunner {
         if (userRepository.findByUserId("BJ240005").isEmpty()) {
             // Crée un nouvel admin
             UserEntity admin = new UserEntity();
-            admin.setUserId("BJ240005"); // identifiant admin
+            admin.setUsername("BJ240005"); // identifiant admin
             admin.setPassword(passwordEncoder.encode("BJ240005")); // mot de passe hashé
             admin.setRole(UserEntity.Role.valueOf("ADMIN")); // rôle
             admin.setEmail("akabeb.com@gmail.com");
-            admin.setFirstname("Yelongnise Kaleb Renaud Gerald");
-            admin.setLastname("AKAKPO");
+            admin.setPrenom("Yelongnise Kaleb Renaud Gerald");
+            admin.setNom("AKAKPO");
             // Sauvegarde dans la base
             userRepository.save(admin);
             System.out.println("Admin créé avec succès !");
@@ -51,16 +51,16 @@ public class DataInitializer implements CommandLineRunner {
             ProfessorEntity professor = new ProfessorEntity();
 
             // Champs hérités de UserEntity
-            professor.setUserId("BJ340005");
+            professor.setUsername("BJ340005");
             professor.setPassword(passwordEncoder.encode("BJ340005"));
             professor.setRole(UserEntity.Role.PROFESSOR);
             professor.setEmail("akakpokaleb@gmail.com");
-            professor.setFirstname("Abdelhakim");
-            professor.setLastname("Bouajila");
+            professor.setPrenom("Abdelhakim");
+            professor.setNom("Bouajila");
 
             // Champs propres à ProfessorEntity
             professor.setGrade("MC");
-            professor.setSpeciality("Géologie");
+            professor.setSpecialite("Géologie");
             professor.setSchoolStatus("Permanent");
 
             professorRepository.save(professor);
@@ -72,17 +72,17 @@ public class DataInitializer implements CommandLineRunner {
             StudentEntity student = new StudentEntity();
 
             // Champs hérités de UserEntity
-            student.setUserId("BJ440005");
+            student.setUsername("BJ440005");
             student.setPassword(passwordEncoder.encode("BJ440005"));
             student.setRole(UserEntity.Role.STUDENT);
             student.setEmail("akakpo09@gmail.com");
-            student.setFirstname("AKAKPO");
-            student.setLastname("Kaleb");
+            student.setPrenom("AKAKPO");
+            student.setNom("Kaleb");
 
             // Champs propres à ProfessorEntity
-            student.setYear(2);
+            student.setNiveau(2);
             student.setGroup("A");
-            student.setField("LGLSI");
+            student.setFiliere("LGLSI");
             student.setDepartment("Informatique");
              studentRepository.save(student);
             System.out.println("Etudiant créé avec succès !");

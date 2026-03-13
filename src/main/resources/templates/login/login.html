@@ -34,8 +34,16 @@
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 
         </div>
-        <div th:if="${failure}" class="alert">
-            <span th:text="${failure}"></span>
+        <div th:if="${param.error}" class="alert">
+
+    <span th:if="${param.error[0] == 'user_not_found'}">
+        Utilisateur introuvable
+    </span>
+
+            <span th:if="${param.error[0] == 'bad_credentials'}">
+        Mot de passe incorrect
+    </span>
+
         </div>
         <div class="others">
             <div class="forgot-link"><a th:href="@{/forgot}">Mot de passe oublié ? </a></div>

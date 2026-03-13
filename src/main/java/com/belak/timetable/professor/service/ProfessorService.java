@@ -22,9 +22,9 @@ public class ProfessorService {
                         new RuntimeException("Professeur introuvable avec userId: " + userId));
 
         return ProfessorDto.builder()
-                .userId(professorEntity.getUserId())
-                .firstName(professorEntity.getFirstname())
-                .lastName(professorEntity.getLastname())
+                .userId(professorEntity.getUsername())
+                .firstName(professorEntity.getPrenom())
+                .lastName(professorEntity.getNom())
                 .email(professorEntity.getEmail())
                 .build();
     }

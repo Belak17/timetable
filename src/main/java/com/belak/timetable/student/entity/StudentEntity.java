@@ -1,9 +1,15 @@
 package com.belak.timetable.student.entity;
 
+import com.belak.timetable.enumeration.Departement;
+import com.belak.timetable.enumeration.Filiere;
+import com.belak.timetable.enumeration.Nationalite;
+import com.belak.timetable.enumeration.TypeDiplome;
 import com.belak.timetable.grouptimetable.entity.GroupTimetableEntity;
 import com.belak.timetable.user.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "student")
@@ -13,11 +19,13 @@ import lombok.*;
 @Getter
 @Setter
 public class StudentEntity  extends UserEntity {
-    private String department ;
+
+    @Enumerated(EnumType.STRING)
     @Column(name = "student_field")
-    private String field ;
+    private Filiere filiere;
     @Column(name = "student_year")
-    private int year ;
+
+    private Integer niveau;
 
     @Column(name = "student_group")
     private String group ;
@@ -27,4 +35,19 @@ public class StudentEntity  extends UserEntity {
 
 
 
+    private String codeDiplome;
+    private String nomDiplome;
+
+    @Enumerated(EnumType.STRING)
+    private TypeDiplome typeDiplome;
+
+    private String numeroInscription;
+
+    //private String groupeC;
+    //private String groupeTD;
+    //private String groupeM;
+    //private String groupeArchive;
+
+
 }
+

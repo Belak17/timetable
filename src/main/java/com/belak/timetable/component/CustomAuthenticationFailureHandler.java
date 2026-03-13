@@ -11,30 +11,25 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-
 @Component
 public class CustomAuthenticationFailureHandler implements AuthenticationFailureHandler {
 
     @Override
     public void onAuthenticationFailure(
-            @NonNull HttpServletRequest request,
-            @NonNull HttpServletResponse response,
-            @NonNull AuthenticationException exception
-    ) throws IOException, ServletException {
+            HttpServletRequest request,
+            HttpServletResponse response,
+            AuthenticationException exception
+    ) throws IOException {
 
-        String errorMessage = "Identifiants incorrects";
+        String error = "bad_credentials";
 
-        // Tu peux détecter le type d'exception
         if (exception instanceof UsernameNotFoundException) {
-            errorMessage = "Utilisateur introuvable";
-        } else if (exception instanceof BadCredentialsException) {
-            errorMessage = "Mot de passe incorrect";
+            error = "user_not_found";
+        }
+        else if (exception instanceof BadCredentialsException) {
+            error = "bad_credentials";
         }
 
-        // Tu peux stocker le message dans la session
-        request.getSession().setAttribute("failure", errorMessage);
-
-        // Rediriger vers la page login
-        response.sendRedirect("/login");
+        response.sendRedirect("/login?error=" + error);
     }
 }

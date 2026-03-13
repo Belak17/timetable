@@ -1,28 +1,13 @@
 package com.belak.timetable.student.service;
 
-import com.belak.timetable.admin.dto.AdminDto;
-import com.belak.timetable.admin.entity.AdminEntity;
-import com.belak.timetable.grouptimetable.entity.GroupTimetableEntity;
-import com.belak.timetable.login.dto.LoginDto;
-import com.belak.timetable.professor.entity.ProfessorEntity;
 import com.belak.timetable.student.dto.StudentDto;
 import com.belak.timetable.student.entity.StudentEntity;
 import com.belak.timetable.student.repository.StudentRepository;
-import jakarta.annotation.Resource;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-
-import java.io.IOException;
 
 @Service
 @Transactional
@@ -41,9 +26,9 @@ public class StudentService {
         StudentEntity studentEntity = studentRepository.findByUserId(userId).get();
 
         return StudentDto.builder()
-                .userId(studentEntity.getUserId())
-                .firstName(studentEntity.getFirstname())
-                .lastName(studentEntity.getLastname())
+                .userId(studentEntity.getUsername())
+                .firstName(studentEntity.getPrenom())
+                .lastName(studentEntity.getNom())
                 .email(studentEntity.getEmail())
                 .build();
     }
