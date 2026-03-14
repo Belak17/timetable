@@ -1,11 +1,14 @@
 package com.belak.timetable.professortimetable.service;
 
+import com.belak.timetable.enumeration.Grade;
+import com.belak.timetable.enumeration.Statuts;
 import com.belak.timetable.exception.*;
 import com.belak.timetable.professor.entity.ProfessorEntity;
 import com.belak.timetable.professor.repository.ProfessorRepository;
 import com.belak.timetable.professortimetable.entity.ProfessorTimetableEntity;
 import com.belak.timetable.professortimetable.repository.ProfessorTimetableRepository;
 import com.spire.xls.*;
+import jdk.jshell.Snippet;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
@@ -76,8 +79,8 @@ public class ProfessorTimetableService {
 
                     String[] parts = fullname.trim().split("\\s+", 2);
 
-                    String firstname = parts[0].trim();
-                    String lastname = parts.length > 1 ? parts[1].trim() : "";
+                    String prenom = parts[0].trim();
+                    String nom = parts.length > 1 ? parts[1].trim() : "";
 
                     // Ajustement hauteur lignes
                     for (int i = 14; i <= 21; i++) dataSheet.setRowHeight(i, 40);
@@ -104,11 +107,11 @@ public class ProfessorTimetableService {
 
 
 
-                    Optional<ProfessorEntity> optionalProfessor = professorRepository.findByNameNormalized(firstname, lastname);
+                    Optional<ProfessorEntity> optionalProfessor = professorRepository.findByNameNormalized(prenom, nom);
                     int finalPosition = position;
                     optionalProfessor.ifPresent(professorEntity ->
                     { ProfessorTimetableEntity timetableEntity = ProfessorTimetableEntity.builder()
-                            .grade(grade) .statut(statut)
+                            .grade(Grade.fromCode(grade)) .statut(Statuts.valueOf(statut))
                             .speciality(speciality) .position(finalPosition)
                             .filename("Timetable_" + finalPosition + ".pdf")
                             .contentType("application/pdf") .fileData(pdfBytes) .build();
@@ -142,9 +145,9 @@ public class ProfessorTimetableService {
     }
     public ResponseEntity<byte[]> getTimetableFileTest(String userId) {
 
-        if (professorRepository.findByUserId(userId).isPresent()) {
+        if (professorRepository.findByUsername(userId).isPresent()) {
             ProfessorTimetableEntity professorTimetableEntity = professorRepository
-                    .findByUserId(userId).get().getTimetable();
+                    .findByUsername(userId).get().getTimetable();
 
             // On renvoie directement le tableau de bytes avec les headers
             return ResponseEntity.ok()
@@ -184,7 +187,7 @@ public class ProfessorTimetableService {
     public byte[] getProfessorPreview(String userId) throws IOException {
 
         ProfessorEntity professor = professorRepository
-                .findByUserIdWithTimetable(userId)
+                .findByUsernameWithTimetable(userId)
                 .orElseThrow(() ->
                         new RuntimeException("Professor non trouvé pour userId : " + userId)
                 );

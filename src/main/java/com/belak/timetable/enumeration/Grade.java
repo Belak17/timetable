@@ -31,4 +31,14 @@ public enum Grade {
     public String getLibelle() {
         return libelle;
     }
+
+    // Méthode pour récupérer l'enum à partir du code
+    public static Grade fromCode(String code) {
+        for (Grade d : Grade.values()) {
+            if (d.getCode().equalsIgnoreCase(code)) {
+                return d;
+            }
+        }
+        return null; // ou lancer exception
+    }
 }

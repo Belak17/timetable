@@ -1,5 +1,7 @@
 package com.belak.timetable.grouptimetable.entity;
 
+import com.belak.timetable.enumeration.Departement;
+import com.belak.timetable.enumeration.Filiere;
 import com.belak.timetable.student.entity.StudentEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -26,9 +28,9 @@ public class GroupTimetableEntity {
             allocationSize = 1
     )
     private Long id ;
-    private String department ;
-    private String field ;
-    private int year ;
+    private Departement departement;
+    private Filiere filiere;
+    private Integer niveau;
     @Column(name = "group_name")
     private String group;
 

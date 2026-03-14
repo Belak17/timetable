@@ -25,4 +25,14 @@ public enum Departement {
     public String getLibelle() {
         return libelle;
     }
+
+    // Méthode utilitaire pour récupérer une constante à partir du libellé
+    public static Departement fromLibelle(String libelle) {
+        for (Departement d : Departement.values()) {
+            if (d.getLibelle().equalsIgnoreCase(libelle)) {
+                return d;
+            }
+        }
+        return null; // ou lancer une exception si tu veux
+    }
 }

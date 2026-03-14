@@ -17,7 +17,7 @@ public class ProfessorService {
     public ProfessorDto createProfessorDto(String userId) {
 
         ProfessorEntity professorEntity = professorRepository
-                .findByUserId(userId)
+                .findByUsername(userId)
                 .orElseThrow(() ->
                         new RuntimeException("Professeur introuvable avec userId: " + userId));
 
@@ -31,7 +31,7 @@ public class ProfessorService {
 
     public byte[] getTimetableFile(String userId) {
 
-        ProfessorEntity professor = professorRepository.findByUserId(userId)
+        ProfessorEntity professor = professorRepository.findByUsername(userId)
                 .orElseThrow(() -> new RuntimeException("Professeur introuvable"));
 
         if (professor.getTimetable() == null) {

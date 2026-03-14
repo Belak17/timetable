@@ -23,7 +23,7 @@ public class StudentService {
     }
     public StudentDto createStudentDto(String userId)
     {
-        StudentEntity studentEntity = studentRepository.findByUserId(userId).get();
+        StudentEntity studentEntity = studentRepository.findByUsername(userId).get();
 
         return StudentDto.builder()
                 .userId(studentEntity.getUsername())
@@ -34,7 +34,7 @@ public class StudentService {
     }
 
     public byte[] getTimetableFile(String userId) {
-        StudentEntity student = studentRepository.findByUserId(userId)
+        StudentEntity student = studentRepository.findByUsername(userId)
                 .orElseThrow(() -> new RuntimeException("Etudiant introuvable"));
 
         if (student.getGroupTimetable() == null) {
@@ -46,7 +46,7 @@ public class StudentService {
     public Page<StudentEntity> getStudentByFieldAndYearAndGroup(String field,int year,String group,int page,int size)
     {
         Pageable pageable = PageRequest.of(page, size);
-        return studentRepository.findByFieldAndYearAndGroup(field,year,group,pageable);
+        return studentRepository.findByFiliereAndNiveauAndGroupe(field, ,year,group,pageable);
     }
 
 }

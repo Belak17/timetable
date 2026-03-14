@@ -1,5 +1,7 @@
 package com.belak.timetable.professortimetable.entity;
 
+import com.belak.timetable.enumeration.Grade;
+import com.belak.timetable.enumeration.Statuts;
 import com.belak.timetable.professor.entity.ProfessorEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -25,8 +27,8 @@ public class ProfessorTimetableEntity {
     )
     private Long id ;
     private String speciality ;
-    private String statut ;
-    private String grade ;
+    private Statuts statut ;
+    private Grade grade ;
     @Column(name = "position_index")
     private int position;
     private String filename ;

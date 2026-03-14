@@ -1,13 +1,13 @@
 package com.belak.timetable.grouptimetable.service;
 
+import com.belak.timetable.enumeration.Departement;
+import com.belak.timetable.enumeration.Filiere;
 import com.belak.timetable.exception.EmptyExcelFileException;
 import com.belak.timetable.exception.FileProcessingException;
 import com.belak.timetable.exception.InvalidExcelFormatException;
 import com.belak.timetable.exception.LibreOfficeConversionException;
 import com.belak.timetable.grouptimetable.entity.GroupTimetableEntity;
 import com.belak.timetable.grouptimetable.repository.GroupTimetableRepository;
-import com.belak.timetable.professor.entity.ProfessorEntity;
-import com.belak.timetable.professortimetable.entity.ProfessorTimetableEntity;
 import com.belak.timetable.student.entity.StudentEntity;
 import com.belak.timetable.student.repository.StudentRepository;
 import com.spire.xls.ExcelVersion;
@@ -17,7 +17,6 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.rendering.PDFRenderer;
-import org.jspecify.annotations.NonNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -213,17 +212,17 @@ public class GroupTimetableService {
 
                     GroupTimetableEntity groupTimetableEntity =
                             GroupTimetableEntity.builder()
-                                    .department(depname)
+                                    .departement(Departement.fromLibelle(depname))
                                     .position(position)
                                     .filename("GroupTimetable_" + position + ".pdf")
                                     .contentType("application/pdf")
                                     .fileData(pdfBytes)
-                                    .year(year)
-                                    .field(field)
+                                    .niveau(year)
+                                    .filiere(Filiere.valueOf(field))
                                     .group(group)
                                     .build();
                     List<StudentEntity> students =
-                            studentRepository.findByDepartmentAndFieldAndYearAndGroup(depname, field, year, group);
+                            studentRepository.findByDepartementAndFiliereAndNiveauAndGroupe(Departement.fromLibelle(depname), Filiere.valueOf(field), year, group);
 
                     for (StudentEntity student : students) {
                         groupTimetableEntity.addStudent(student);
@@ -250,9 +249,9 @@ public class GroupTimetableService {
     }
     public ResponseEntity<byte[]> getTimetableFileTest(String userId) {
 
-        if (studentRepository.findByUserId(userId).isPresent()) {
+        if (studentRepository.findByUsername(userId).isPresent()) {
             GroupTimetableEntity groupTimetableEntity = studentRepository
-                    .findByUserId(userId).get().getGroupTimetable();
+                    .findByUsername(userId).get().getGroupTimetable();
 
             // On renvoie directement le tableau de bytes avec les headers
             return ResponseEntity.ok()
@@ -293,7 +292,7 @@ public class GroupTimetableService {
     public byte[] getStudentPreview(String userId) throws IOException {
 
         StudentEntity student = studentRepository
-                .findByUserId(userId)
+                .findByUsername(userId)
                 .orElseThrow(() ->
                         new RuntimeException("Etudiant non trouvé pour userId : " + userId)
                 );

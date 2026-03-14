@@ -1,6 +1,5 @@
 package com.belak.timetable.professor.repository;
 
-import com.belak.timetable.admin.entity.AdminEntity;
 import com.belak.timetable.professor.entity.ProfessorEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -11,24 +10,24 @@ import java.util.Optional;
 
 public interface ProfessorRepository  extends JpaRepository<ProfessorEntity,Long> {
 
-    Optional<ProfessorEntity> findByFirstnameAndLastnameAndSpecialityAndGrade(String fisrtname, String lastname, String speciality, String grade);
 
-    Optional<ProfessorEntity> findByUserId(String userId);
+
+    Optional<ProfessorEntity> findByUsername(String username);
 
     @Query("""
 SELECT p FROM ProfessorEntity p
-WHERE LOWER(TRIM(p.firstname)) = LOWER(TRIM(:firstname))
-AND LOWER(TRIM(p.lastname)) = LOWER(TRIM(:lastname))
+WHERE LOWER(TRIM(p.prenom)) = LOWER(TRIM(:prenom))
+AND LOWER(TRIM(p.nom)) = LOWER(TRIM(:nom))
 """)
     Optional<ProfessorEntity> findByNameNormalized(
-            @Param("firstname") String firstname,
-            @Param("lastname") String lastname
+            @Param("prenom") String prenom,
+            @Param("nom") String nom
     );
 
     @Query("""
 SELECT p FROM ProfessorEntity p
 LEFT JOIN FETCH p.timetable
-WHERE p.userId = :userId
+WHERE p.userName = :userName
 """)
-    Optional<ProfessorEntity> findByUserIdWithTimetable(String userId);
+    Optional<ProfessorEntity> findByUsernameWithTimetable(String username);
 }
